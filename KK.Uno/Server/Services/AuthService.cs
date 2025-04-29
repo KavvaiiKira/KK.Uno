@@ -1,8 +1,8 @@
 ﻿using KK.Uno.Contracts.Api;
-using KK.Uno.Server.Constants;
 using KK.Uno.Server.EF.Entities;
 using Microsoft.AspNetCore.Identity;
 using KK.Uno.Contracts.Dtos.Auth;
+using KK.Uno.Contracts.Constants;
 
 namespace KK.Uno.Server.Services
 {
@@ -65,7 +65,7 @@ namespace KK.Uno.Server.Services
             {
                 _logger.LogError($"Error while registering user with Login: {registerUserRequest.Login}. Error message: {ex.Message}");
 
-                return KKApiResult<bool>.BadRequest(ErrorConstants.ServerError);
+                return KKApiResult<bool>.BadRequest(ErrorConstants.Server.ServerError);
             }
         }
 
@@ -103,7 +103,7 @@ namespace KK.Uno.Server.Services
                 var user = await _userService.GetUserByLoginAsync(login);
                 if (!_userService.VerifyPassword(user, password))
                 {
-                    return KKApiResult<AuthResponseDto>.BadRequest(ErrorConstants.LoginErrorMessage);
+                    return KKApiResult<AuthResponseDto>.BadRequest(ErrorConstants.Server.LoginErrorMessage);
                 }
 
                 var authResult = new AuthResponseDto()
@@ -118,7 +118,7 @@ namespace KK.Uno.Server.Services
             {
                 _logger.LogError($"Login Error. Error message: {ex.Message}");
 
-                return KKApiResult<AuthResponseDto>.BadRequest(ErrorConstants.LoginErrorMessage);
+                return KKApiResult<AuthResponseDto>.BadRequest(ErrorConstants.Server.LoginErrorMessage);
             }
         }
     }

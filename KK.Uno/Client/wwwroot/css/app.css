@@ -1,6 +1,70 @@
-h1:focus {
-    outline: none;
+:root {
+    --main-background-color: #0A0A0A;
+    --secondary-background-color: #DBD7C2;
+    --main-accent-color: #D9B08C;
+    --main-font-color: #DBD7C2;
+    --light-border-color: #DBD7C2;
+    --kk-radius: 30px;
 }
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: var(--main-background-color);
+    overflow: hidden;
+    font-family: "Exo 2", sans-serif;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+.bg-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #0a0a0a;
+    overflow: hidden;
+}
+
+.pixel {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0.35;
+    border-radius: 1px;
+}
+
+.loader--wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 40px;
+    aspect-ratio: 1;
+    color: #f03355;
+    position: relative;
+    background: radial-gradient(10px,var(--secondary-background-color) 94%,#0000);
+}
+
+    .loader:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(9px at bottom right,#0000 94%,var(--secondary-background-color)) top left, radial-gradient(9px at bottom left,#0000 94%,var(--secondary-background-color)) top right, radial-gradient(9px at top right,#0000 94%,var(--secondary-background-color)) bottom left, radial-gradient(9px at top left,#0000 94%,var(--secondary-background-color)) bottom right;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        animation: loaderAnimation 1.5s infinite cubic-bezier(0.3,1,0,1);
+    }
 
 #blazor-error-ui {
     background: lightyellow;

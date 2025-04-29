@@ -1,0 +1,16 @@
+﻿@inject KKToastService _kkToastService
+
+<div class="@GetToastClasses()">
+    <div class="kk-toast-body">
+        <div class="header">
+            <span class="header-text @HeadingTextCssClass">
+                @Heading
+            </span>
+        </div>
+        <div class="message">
+            <span class="message-text">
+                @Message
+            </span>
+        </div>
+    </div>
+</div>

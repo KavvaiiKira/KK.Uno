@@ -7,13 +7,19 @@
     <base href="/" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
-    
-    <!-- If you add any scoped CSS files, uncomment the following to load them
-    <link href="KK.Uno.Client.styles.css" rel="stylesheet" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="KK.Uno.Client.styles.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div class="bg-pattern" id="bg-pattern"></div>
+    <div class="content" id="app">
+        <div class="loader--wrapper">
+            <div class="loader"></div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -22,6 +28,19 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>
+        const colors = ["#005BB5", "#D62F24", "#1E9E2F", "#E6B800"];
+        const bgPattern = document.getElementById("bg-pattern");
+
+        for (let i = 0; i < 120; i++) {
+            const pixel = document.createElement("div");
+            pixel.className = "pixel";
+            pixel.style.background = colors[Math.floor(Math.random() * 4)];
+            pixel.style.left = `${Math.random() * 100}vw`;
+            pixel.style.top = `${Math.random() * 100}vh`;
+            bgPattern.appendChild(pixel);
+        }
+    </script>
 </body>
 
 </html>

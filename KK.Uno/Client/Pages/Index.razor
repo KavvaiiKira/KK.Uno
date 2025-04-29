@@ -1,3 +1,12 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<PageTitle>KK.Uno</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <MainComponent />
+    </Authorized>
+    <NotAuthorized>
+        <LoginRedirect />
+    </NotAuthorized>
+</AuthorizeView>

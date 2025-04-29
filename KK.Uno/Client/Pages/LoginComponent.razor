@@ -1,0 +1,30 @@
+﻿@page "/login"
+
+@inject IAuthService _authService
+@inject NavigationManager _navigationManager
+
+<div class="main-login">
+    <div class="login-container" @onkeydown="@OnKeyDownAsync">
+        <div class="title">
+            <div class="kk">KK</div>
+            <div class="uno">UNO</div>
+        </div>
+        <div class="user-login-container">
+            <label for="user-login-i">Login</label>
+            <input type="text" class="user-login-input" id="user-login-i" @oninput=@LoginInput />
+            <div class="error">
+                @_loginError
+            </div>
+        </div>
+        <div class="user-password-container">
+            <label for="user-password-i">Password</label>
+            <input type="@(_passwordVisible ? "text" : "password")" class="user-password-input" id="user-password-i" @oninput=@PasswordInput />
+            <div class="error">
+                @_passwordError
+            </div>
+            <div class="password-visibility-action @(_passwordVisible ? "visible" : string.Empty)" @onclick=@ChangePasswordVisibility draggable="false" />
+        </div>
+    </div>
+</div>
+
+<KKToast />

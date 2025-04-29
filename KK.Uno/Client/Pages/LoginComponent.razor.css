@@ -1,0 +1,123 @@
+﻿.main-login {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.login-container,
+.title,
+.user-login-container,
+.user-password-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container {
+    padding-top: 100px;
+    align-items: center;
+}
+
+.title {
+    color: var(--main-font-color);
+    text-align: center;
+    margin-bottom: 100px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.kk {
+    font-size: 300px;
+    font-weight: 800;
+    line-height: 300px;
+}
+
+.uno {
+    font-size: 180px;
+    line-height: 100px;
+    font-weight: 700;
+}
+
+.user-login-container,
+.user-password-container {
+    position: relative;
+    width: 350px;
+}
+
+    .user-login-container label,
+    .user-password-container label {
+        color: var(--main-font-color);
+        font-size: 40px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+.user-login-input,
+.user-password-input {
+    font-size: 22px;
+    font-weight: 600;
+    height: 34px;
+    line-height: 26px;
+    color: var(--main-font-color);
+    border: 2px solid var(--light-border-color);
+    background-color: var(--main-background-color);
+    border-radius: var(--kk-radius);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    .user-login-input:focus,
+    .user-password-input:focus {
+        outline: 1px solid var(--light-border-color);
+        border-color: var(--light-border-color);
+    }
+
+    .user-login-input::-webkit-outer-spin-button,
+    .user-login-input::-webkit-inner-spin-button,
+    .user-password-input::-webkit-outer-spin-button,
+    .user-password-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .user-login-input[type=number],
+    .user-password-input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+.error {
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(225, 49, 48);
+}
+
+.password-visibility-action {
+    position: absolute;
+    right: 13px;
+    top: 64px;
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    background-image: url('icons/password/hide.png');
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .password-visibility-action.visible {
+        background-image: url('icons/password/show.png');
+    }
+
+    .password-visibility-action:hover {
+        right: 10px;
+        top: 62px;
+        width: 30px;
+        height: 30px;
+    }
