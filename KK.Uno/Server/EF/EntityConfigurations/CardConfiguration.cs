@@ -39,6 +39,17 @@ namespace KK.Uno.Server.EF.EntityConfigurations
                 .HasColumnName(DBConstants.Fields.Card.Image)
                 .HasColumnType(DBConstants.Types.ByteArray)
                 .IsRequired(true);
+
+            builder
+                .Property(card => card.CardCollectionId)
+                .HasColumnName(DBConstants.Fields.Card.CardCollectionId)
+                .IsRequired(true);
+
+            builder
+                .HasOne(card => card.CardCollection)
+                .WithMany(cardCollection => cardCollection.Cards)
+                .HasForeignKey(card => card.CardCollectionId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

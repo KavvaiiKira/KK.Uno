@@ -8,8 +8,8 @@
 
         public decimal Price { get; set; }
 
-        public ICollection<CardEntity> Cards { get; set; }
+        public ICollection<CardEntity> Cards { get; set; } = new List<CardEntity>();
 
-        public ICollection<UserEntity> Users { get; set; }
+        public ICollection<UserCardCollectionEntity> UserCardCollections { get; set; } = new List<UserCardCollectionEntity>();
     }
 }

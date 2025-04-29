@@ -1,7 +1,7 @@
 ﻿using KK.Uno.Server.EF.Constants;
 using KK.Uno.Server.EF.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KK.Uno.Server.EF.EntityConfigurations
 {
@@ -32,23 +32,14 @@ namespace KK.Uno.Server.EF.EntityConfigurations
             builder
                 .HasMany(cardCollection => cardCollection.Cards)
                 .WithOne(card => card.CardCollection)
-                .HasForeignKey(cards => cards.CardCollectionId)
+                .HasForeignKey(card => card.CardCollectionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
-                .HasMany(cardCollection => cardCollection.Users)
-                .WithMany(user => user.CardCollections)
-                .UsingEntity<UserCardCollectionEntity>(
-                    userCardCollection =>
-                        userCardCollection
-                            .HasOne<UserEntity>()
-                            .WithMany()
-                            .HasForeignKey(userCardCollection => userCardCollection.UserId),
-                    userCardCollection =>
-                        userCardCollection
-                            .HasOne<CardCollectionEntity>()
-                            .WithMany()
-                            .HasForeignKey(userCardCollection => userCardCollection.CardCollectionId));
+                .HasMany(cardCollection => cardCollection.UserCardCollections)
+                .WithOne(userCardCollection => userCardCollection.CardCollection)
+                .HasForeignKey(userCardCollection => userCardCollection.CardCollectionId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

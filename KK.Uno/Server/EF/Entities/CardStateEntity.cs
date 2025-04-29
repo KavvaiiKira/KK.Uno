@@ -8,7 +8,7 @@
 
         public int Color { get; set; }
 
-        public Guid UserGameSatetId { get; set; }
+        public Guid UserGameStateId { get; set; }
 
         public UserGameStateEntity UserGameState { get; set; }
     }

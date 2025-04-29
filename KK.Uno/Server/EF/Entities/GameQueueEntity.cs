@@ -2,6 +2,8 @@
 {
     public class GameQueueEntity
     {
+        public Guid Id { get; set; }
+
         public Guid GameId { get; set; }
 
         public GameEntity Game { get; set; }

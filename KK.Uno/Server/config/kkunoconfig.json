@@ -1,0 +1,4 @@
+{
+  "ENV_TYPE": "Dev",
+  "SQL_CONNECTION_STRING": "Host=localhost; Port=5432; User Id=uno_admin; Password=1234567890; Database=kk_uno; Enlist=true; Include Error Detail=true; options=-c standard_conforming_strings=on"
+}

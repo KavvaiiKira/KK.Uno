@@ -1,7 +1,7 @@
 ﻿using KK.Uno.Server.EF.Constants;
 using KK.Uno.Server.EF.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KK.Uno.Server.EF.EntityConfigurations
 {
@@ -25,6 +25,12 @@ namespace KK.Uno.Server.EF.EntityConfigurations
                 .IsRequired(true);
 
             builder
+                .Property(user => user.Image)
+                .HasColumnName(DBConstants.Fields.User.Image)
+                .HasColumnType(DBConstants.Types.ByteArray)
+                .IsRequired(false);
+
+            builder
                 .Property(user => user.Login)
                 .HasColumnName(DBConstants.Fields.User.Login)
                 .IsRequired(true);
@@ -46,19 +52,16 @@ namespace KK.Uno.Server.EF.EntityConfigurations
                 .IsRequired(true);
 
             builder
-                .HasMany(user => user.CardCollections)
-                .WithMany(cardCollection => cardCollection.Users)
-                .UsingEntity<UserCardCollectionEntity>(
-                    userCardCollection =>
-                        userCardCollection
-                            .HasOne<CardCollectionEntity>()
-                            .WithMany()
-                            .HasForeignKey(userCardCollection => userCardCollection.CardCollectionId),
-                    userCardCollection =>
-                        userCardCollection
-                            .HasOne<UserEntity>()
-                            .WithMany()
-                            .HasForeignKey(userCardCollection => userCardCollection.UserId));
+                .HasMany(user => user.UserCardCollections)
+                .WithOne(userCardCollection => userCardCollection.User)
+                .HasForeignKey(userCardCollection => userCardCollection.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasMany(user => user.UserRoles)
+                .WithOne(userRole => userRole.User)
+                .HasForeignKey(userRole => userRole.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
