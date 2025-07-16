@@ -1,0 +1,64 @@
+﻿@page "/register"
+
+@inject IAuthService _authService
+@inject KKToastService _kkToastService
+@inject NavigationManager _navigationManager
+@inject IJSRuntime _jsRuntime
+
+<PageTitle>KK.Uno - Registration</PageTitle>
+
+<div class="main-register">
+    <div class="register--wrapper">
+        <div class="kk-input-container">
+            <label for="user-image">Image:</label>
+            <div class="user-image-view" id="user-image" @onclick="@OpenFileDialogAsync">
+                <img src=@(_image == null || !_image.Any() ? "/icons/user-default.png" : GetUserImageData()) class="profile-image" />
+            </div>
+            <InputFile @ref="@_fileInput" OnChange="HandleFileSelectedAsync" AdditionalAttributes="FileInputConstants.Attributes" />
+        </div>
+        <div class="kk-input-container">
+            <label for="user-display-name-i">Display Name</label>
+            <input type="text" class="kk-input" id="user-display-name-i" @oninput=@OnDisplayNameChanged />
+            <div class="error">
+                @_displayNameErrors
+            </div>
+        </div>
+        <div class="kk-input-container">
+            <label for="user-login-i">Login</label>
+            <input type="text" class="kk-input" id="user-login-i" @oninput=@OnLoginChanged />
+            <div class="error">
+                @_loginErrors
+            </div>
+        </div>
+        <div class="kk-input-container">
+            <label for="user-password-i">Password</label>
+            <input type="@(_passwordVisible ? "text" : "password")" class="kk-input" id="user-password-i" @oninput=@OnPasswordChanged />
+            <div class="error">
+                @_passwordErrors
+            </div>
+            <div class="password-visibility-action @(_passwordVisible ? "visible" : string.Empty)" @onclick=@ChangePasswordVisibility draggable="false" />
+        </div>
+        <div class="kk-input-container">
+            <label for="user-confirmation-i">Confirmation</label>
+            <input type="@(_confirmationVisible ? "text" : "password")" class="kk-input" id="user-confirmation-i" @oninput=@OnConfirmationChanged />
+            <div class="error">
+                @_confirmationErrors
+            </div>
+            <div class="confirmation-visibility-action @(_confirmationVisible ? "visible" : string.Empty)" @onclick=@ChangeConfirmationVisibility draggable="false" />
+        </div>
+        <div class="actions">
+            <div class="register-action" @onclick="@RegisterAsync">
+                <div class="register-action-title">
+                    Register
+                </div>
+            </div>
+            <div class="cancel-action" @onclick="@Cancel">
+                <div class="cancel-action-title">
+                    Cancel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<KKToast />

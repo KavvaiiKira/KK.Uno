@@ -16,20 +16,6 @@ namespace KK.Uno.Server.Controllers
             _authService = authService;
         }
 
-        [HttpPost("register")]
-        [ProducesResponseType(typeof(KKApiResult<bool>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<KKApiResult<bool>>> RegisterUserAsync([FromBody] RegisterUserRequestDto registerUserRequest)
-        {
-            if (registerUserRequest == null)
-            {
-                return KKApiResult<bool>.BadRequest("Requst BODY must not be NULL!");
-            }
-
-            var res = await _authService.RegisterUserAsync(registerUserRequest);
-
-            return res;
-        }
-
         [HttpPost("login")]
         [ProducesResponseType(typeof(KKApiResult<AuthResponseDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<KKApiResult<AuthResponseDto>>> LoginAsync([FromBody] AuthRequestDto authRequestDto)
@@ -40,6 +26,20 @@ namespace KK.Uno.Server.Controllers
             }
 
             var res = await _authService.LoginAsync(authRequestDto.Login, authRequestDto.Password);
+
+            return res;
+        }
+
+        [HttpPost("register")]
+        [ProducesResponseType(typeof(KKApiResult<bool>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<KKApiResult<bool>>> RegisterUserAsync([FromBody] RegisterUserRequestDto registerUserRequest)
+        {
+            if (registerUserRequest == null)
+            {
+                return KKApiResult<bool>.BadRequest("Requst BODY must not be NULL!");
+            }
+
+            var res = await _authService.RegisterUserAsync(registerUserRequest);
 
             return res;
         }

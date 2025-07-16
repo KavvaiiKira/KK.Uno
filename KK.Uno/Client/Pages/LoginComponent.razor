@@ -1,7 +1,10 @@
 ﻿@page "/login"
+@page "/login/{LoginFormUrl}"
 
 @inject IAuthService _authService
 @inject NavigationManager _navigationManager
+
+<PageTitle>KK.Uno - Login</PageTitle>
 
 <div class="main-login">
     <div class="login-container" @onkeydown="@OnKeyDownAsync">
@@ -9,20 +12,23 @@
             <div class="kk">KK</div>
             <div class="uno">UNO</div>
         </div>
-        <div class="user-login-container">
+        <div class="kk-input-container">
             <label for="user-login-i">Login</label>
-            <input type="text" class="user-login-input" id="user-login-i" @oninput=@LoginInput />
+            <input type="text" value="@LoginFormUrl" class="kk-input" id="user-login-i" @oninput=@LoginInput />
             <div class="error">
                 @_loginError
             </div>
         </div>
-        <div class="user-password-container">
+        <div class="kk-input-container">
             <label for="user-password-i">Password</label>
-            <input type="@(_passwordVisible ? "text" : "password")" class="user-password-input" id="user-password-i" @oninput=@PasswordInput />
+            <input type="@(_passwordVisible ? "text" : "password")" class="kk-input" id="user-password-i" @oninput=@PasswordInput />
             <div class="error">
                 @_passwordError
             </div>
             <div class="password-visibility-action @(_passwordVisible ? "visible" : string.Empty)" @onclick=@ChangePasswordVisibility draggable="false" />
+        </div>
+        <div class="register-help">
+            Don't have an account? <span class="go-to-register" @onclick=@GoToRegister>Register!</span>
         </div>
     </div>
 </div>

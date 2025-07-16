@@ -16,7 +16,7 @@ namespace KK.Uno.Server.Services
 
         public async Task<IEnumerable<Guid>> GetDefaultRoleIdsAsync()
         {
-            var defaultRoles = Roles.GetDefaultRoles();
+            var defaultRoles = Roles.GetUserRoles();
 
             var roles = await _roleRepository
                 .GetAll()

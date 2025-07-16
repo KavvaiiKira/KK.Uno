@@ -6,6 +6,8 @@ namespace KK.Uno.Client.Services
     {
         Task<bool> LoginAsync(AuthRequestDto authRequestDto);
 
+        Task<bool> RegisterAsync(RegisterUserRequestDto registerUserRequest);
+
         Task LogoutAsync();
     }
 }

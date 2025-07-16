@@ -58,6 +58,27 @@ namespace KK.Uno.Client.Services
             return true;
         }
 
+        public async Task<bool> RegisterAsync(RegisterUserRequestDto registerUserRequest)
+        {
+            var res = await _httpClient.PostAsJsonAsync($"{_baseUri}register", registerUserRequest);
+            if (!res.IsSuccessStatusCode)
+            {
+                _kkToastService.ShowToast(ErrorConstants.Server.ServerError, Enums.ToastLevel.Error);
+                return false;
+            }
+
+            var resContent = await res.Content.ReadFromJsonAsync<KKApiResult<bool>>() ??
+                KKApiResult<bool>.BadRequest(ErrorConstants.Server.ServerError);
+
+            if (!resContent.Success)
+            {
+                _kkToastService.ShowToast(resContent.Message, Enums.ToastLevel.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task LogoutAsync()
         {
             await _tokenService.LogoutAsync();

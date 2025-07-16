@@ -6,6 +6,9 @@ namespace KK.Uno.Client.Pages
 {
     public partial class LoginComponent
     {
+        [Parameter]
+        public string LoginFormUrl { get; set; } = string.Empty;
+
         private string _userLogin = string.Empty;
         private string _userPassword = string.Empty;
 
@@ -13,6 +16,14 @@ namespace KK.Uno.Client.Pages
         private string _passwordError = string.Empty;
 
         private bool _passwordVisible = false;
+
+        protected override void OnParametersSet()
+        {
+            if (!string.IsNullOrEmpty(LoginFormUrl))
+            {
+                _userLogin = LoginFormUrl;
+            }
+        }
 
         private void LoginInput(ChangeEventArgs args)
         {
@@ -24,11 +35,6 @@ namespace KK.Uno.Client.Pages
         {
             _userPassword = args.Value?.ToString() ?? string.Empty;
             _passwordError = AnyPasswordErrors ? "Password required!" : string.Empty;
-        }
-
-        private void ChangePasswordVisibility()
-        {
-            _passwordVisible = !_passwordVisible;
         }
 
         private async Task OnKeyDownAsync(KeyboardEventArgs e)
@@ -50,6 +56,10 @@ namespace KK.Uno.Client.Pages
                 _navigationManager.NavigateTo("/", true);
             }
         }
+
+        private void ChangePasswordVisibility() => _passwordVisible = !_passwordVisible;
+
+        private void GoToRegister() => _navigationManager.NavigateTo("/register");
 
         private bool AnyLoginErrors => string.IsNullOrEmpty(_userLogin);
 
